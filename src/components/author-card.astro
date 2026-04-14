@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { author } = Astro.props
-const { name, avatar, bio, pronouns } = author.data
+const { name, avatar, bio } = author.data
 const currentPath = Astro.url.pathname
 const isAuthorPage = currentPath === `/authors/${author.id}`
 
@@ -48,11 +48,6 @@ const socialLinks: SocialLink[] = [
       <div>
         <div class="flex flex-wrap items-center gap-x-2">
           <h3 class="text-lg font-medium">{name}</h3>
-          {
-            pronouns && (
-              <span class="text-muted-foreground text-sm">({pronouns})</span>
-            )
-          }
         </div>
         <p class="text-muted-foreground text-sm">{bio}</p>
       </div>

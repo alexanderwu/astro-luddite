@@ -217,7 +217,6 @@ Add author information in `src/content/authors/` as Markdown files. A file named
 ```yml
 ---
 name: 'enscribe'
-pronouns: 'he/him'
 avatar: 'https://gravatar.com/avatar/9bfdc4ec972793cf05cb91efce5f4aaaec2a0da1bf4ec34dad0913f1d845faf6.webp?size=256'
 bio: 'd(-_-)b'
 website: 'https://enscribe.dev'
@@ -232,7 +231,6 @@ The author schema is defined as follows:
 | Field      | Type (Zod)                                 | Requirements                                                                                                                                                             | Required |
 | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
 | `name`     | `string`                                   | n/a                                                                                                                                                                      | Yes      |
-| `pronouns` | `string`                                   | n/a                                                                                                                                                                      | Optional |
 | `avatar`   | `string.url()` or `string.startsWith('/')` | Should be either a valid URL or a path starting with `/`. Preferably use [Gravatar](https://en.gravatar.com/site/implement/images/) with the `?size=256` size parameter. | Yes      |
 | `bio`      | `string`                                   | n/a                                                                                                                                                                      | Optional |
 | `mail`     | `string.email()`                           | Must be a valid email address.                                                                                                                                           | Optional |
