@@ -77,9 +77,10 @@ if (isSubpost(post.id)) {
         data-url={`/blog/${entry.id}`}
         data-title={pageTitle(entry.data.title)}
         data-embedded={i > 0 || undefined}
+        data-pagefind-body={entry.id === post.id ? true : undefined}
       >
         <header>
-          <h1>{entry.data.title}</h1>
+          <h1 data-pagefind-meta="title">{entry.data.title}</h1>
           <post-meta>
             {authors.length > 0 && (
               <post-authors>
@@ -111,7 +112,7 @@ if (isSubpost(post.id)) {
               </post-tags>
             )}
           </post-meta>
-          <p>{entry.data.description}</p>
+          <p data-pagefind-meta="description">{entry.data.description}</p>
         </header>
         {entry.data.image && (
           <post-banner>

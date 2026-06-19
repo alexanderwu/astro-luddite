@@ -1,3 +1,5 @@
+import type { AstroIntegration } from "astro"
+import * as pagefindLib from "pagefind"
 import { defineConfig } from "astro/config"
 import sitemap from "@astrojs/sitemap"
 import { satteri } from "@astrojs/markdown-satteri"
@@ -10,6 +12,26 @@ import { calloutDirective } from "./src/lib/callout"
 import { externalLinks } from "./src/lib/external-links"
 import { headingNamespace } from "./src/lib/heading-namespace"
 import { headingAnchors } from "./src/lib/heading-anchors"
+
+function pagefind(): AstroIntegration {
+  return {
+    name: "pagefind",
+    hooks: {
+      "astro:build:done": async ({ dir, logger }) => {
+        const outDir = new URL(dir).pathname
+        const { index } = await pagefindLib.createIndex({})
+        if (!index) {
+          logger.error("Pagefind failed to create an index")
+          return
+        }
+        await index.addDirectory({ path: outDir })
+        await index.writeFiles({ outputPath: `${outDir}/pagefind` })
+        await pagefindLib.close()
+        logger.info("Pagefind index written to /pagefind")
+      },
+    },
+  }
+}
 
 export default defineConfig({
   devToolbar: {
@@ -24,6 +46,7 @@ export default defineConfig({
         !/\/authors\/[^/]+\/?$/.test(page) &&
         !page.includes("/tags/"),
     }),
+    pagefind(),
   ],
   markdown: {
     syntaxHighlight: false,
