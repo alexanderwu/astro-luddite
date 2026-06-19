@@ -76,6 +76,7 @@ const authors = await getEntries(post.data.authors)
         font-size: var(--step-1);
         line-height: calc(var(--leading-offset) + 1em);
         font-weight: var(--font-weight-medium);
+        transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       entry-meta {
@@ -134,6 +135,10 @@ const authors = await getEntries(post.data.authors)
       p {
         color: var(--muted-foreground);
       }
+    }
+
+    &:hover entry-info > a {
+      color: var(--accent-foreground);
     }
 
     @media (width < 40rem) {

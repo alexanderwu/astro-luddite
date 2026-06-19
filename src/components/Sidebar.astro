@@ -130,9 +130,12 @@ const section = NAVIGATION.find(
       display: block;
       color: var(--muted-foreground);
 
-      &:hover,
-      &[aria-current="page"] {
+      &:hover {
         color: var(--foreground);
+      }
+
+      &[aria-current="page"] {
+        color: var(--accent-foreground);
       }
     }
 
