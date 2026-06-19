@@ -1,3 +1,5 @@
+import { join } from "node:path"
+import { fileURLToPath } from "node:url"
 import type { AstroIntegration } from "astro"
 import * as pagefindLib from "pagefind"
 import { defineConfig } from "astro/config"
@@ -18,14 +20,14 @@ function pagefind(): AstroIntegration {
     name: "pagefind",
     hooks: {
       "astro:build:done": async ({ dir, logger }) => {
-        const outDir = new URL(dir).pathname
+        const outDir = fileURLToPath(dir)
         const { index } = await pagefindLib.createIndex({})
         if (!index) {
           logger.error("Pagefind failed to create an index")
           return
         }
         await index.addDirectory({ path: outDir })
-        await index.writeFiles({ outputPath: `${outDir}/pagefind` })
+        await index.writeFiles({ outputPath: join(outDir, "pagefind") })
         await pagefindLib.close()
         logger.info("Pagefind index written to /pagefind")
       },
