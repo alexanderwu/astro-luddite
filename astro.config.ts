@@ -12,6 +12,9 @@ import { headingNamespace } from "./src/lib/heading-namespace"
 import { headingAnchors } from "./src/lib/heading-anchors"
 
 export default defineConfig({
+  devToolbar: {
+    enabled: false,
+  },
   site: "https://astro-erudite.vercel.app",
   prefetch: { prefetchAll: true },
   integrations: [
@@ -27,7 +30,12 @@ export default defineConfig({
     processor: satteri({
       features: { directive: true, math: true },
       mdastPlugins: [calloutDirective, inlineExpressiveCode, temmlMath],
-      hastPlugins: [externalLinks, blockExpressiveCode, headingNamespace, headingAnchors],
+      hastPlugins: [
+        externalLinks,
+        blockExpressiveCode,
+        headingNamespace,
+        headingAnchors,
+      ],
     }),
   },
 })
